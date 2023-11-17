@@ -1,16 +1,49 @@
-# bootloader
-
-[![Docs](https://docs.rs/bootloader/badge.svg)](https://docs.rs/bootloader)
-[![Build Status](https://github.com/rust-osdev/bootloader/actions/workflows/build.yml/badge.svg)](https://github.com/rust-osdev/bootloader/actions/workflows/build.yml)
-[![Join the chat at https://gitter.im/rust-osdev/bootloader](https://badges.gitter.im/rust-osdev/bootloader.svg)](https://gitter.im/rust-osdev/bootloader?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 An experimental x86_64 bootloader that works on both BIOS and UEFI systems. Written in Rust and some inline assembly, buildable on all platforms without additional build-time dependencies (just some `rustup` components).
 
-## Requirements
+Trident is an operating system originally developed as part of a series on [Medium](https://medium.com/@zaiqi) and [MBP2](https://mbp2.blog/@az)
+before being co-opted into a personal research project.
+
+The `springboard` bootloader project is a fork of [rust-osdev/bootloader](https://github.com/rust-osdev/bootloader)
+fine-tuned to the needs of the Trident project.
+
+As of 2023.11, you will need:
+- The Rust nightly as of 2023.11.12, which you may obtain through the official website: https://rust-lang.org/learn/get-started
+- Docker to run the build environment: https://www.docker.com/get-started/
+
+# Springboard
+
+VERSION: 3.0.1/EARLY/UNRELEASED [![Build Status](https://github.com/azyklus/springboard/actions/workflows/build.yml/badge.svg)](https://github.com/azyklus/springboard/actions/workflows/build.yml)  
+LICENSE: [Apache-2.0](https://github.com/azyklus/springboard/blob/trunk/LICENSE)  
+README: [Where would you rather be?](https://xkcd.com/650/)  
+INFO:
+
+The upstream bootloader, and lib(s) source tree can be found here.
+
+### Extensions
+
+You will eventually be able to develop your own extensions to Trident 3 through a proposed Extensions API.
+
+### Contributing
+
+If you'd like to contribute to this project, please [fork](https://github.com/azyklus/sys3/fork) it and
+submit pull requests with your desired features.
+
+1. [Fork it.](https://github.com/azyklus/sys3/fork)
+2. ????? (I forgot what went here)
+3. Submit pull request with your feature. ("[FEATURE] describe your feature").
+4. Profit?
+
+### Useful Links
+
+- [MBP2 Page](https://mbp2.blog/src/@trident)
+- [Matrix Room](https://matrix.to/#/%23two-worlds:mozilla.org)
+- [Discord Server](https://discord.gg/B9agTdVH4U)
+
+### Requirements
 
 You need a nightly [Rust](https://www.rust-lang.org) compiler with the `llvm-tools-preview` component, which can be installed through `rustup component add llvm-tools-preview`.
 
-## Usage
+### Usage
 
 To use this crate, you need to adjust your kernel to be bootable first. Then you can create a bootable disk image from your compiled kernel. These steps are explained in detail below.
 
