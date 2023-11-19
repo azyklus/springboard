@@ -5,6 +5,7 @@ use futures::executor::block_on;
 use futures_concurrency::future::Join;
 use std::path::{Path, PathBuf};
 const BOOTLOADER_VERSION: &str = env!("CARGO_PKG_VERSION");
+const BOOTLOADER_REPO: &str = "https://github.com/azyklus/springboard";
 
 fn main() {
     #[cfg(not(feature = "uefi"))]
@@ -86,7 +87,7 @@ async fn buildUefiBootloader(out_dir: &Path) -> PathBuf {
         println!("cargo:rerun-if-changed=uefi");
         println!("cargo:rerun-if-changed=common");
     } else {
-        cmd.arg("--version").arg(BOOTLOADER_VERSION);
+        cmd.arg("--git").arg(BOOTLOADER_REPO);
     }
     cmd.arg("--locked");
     cmd.arg("--target").arg("x86_64-unknown-uefi");
@@ -125,7 +126,7 @@ async fn buildBiosBootSector(out_dir: &Path) -> PathBuf {
         cmd.arg("--path").arg(&local_path);
         println!("cargo:rerun-if-changed={}", local_path.display());
     } else {
-        cmd.arg("--version").arg(BOOTLOADER_VERSION);
+        cmd.arg("--git").arg(BOOTLOADER_REPO);
     }
     cmd.arg("--locked");
     cmd.arg("--target").arg("i386-code16-boot-sector.json");
@@ -173,7 +174,7 @@ async fn buildBiosStage2(out_dir: &Path) -> PathBuf {
             local_path.with_file_name("common").display()
         );
     } else {
-        cmd.arg("--version").arg(BOOTLOADER_VERSION);
+        cmd.arg("--git").arg(BOOTLOADER_REPO);
     }
     cmd.arg("--locked");
     cmd.arg("--target").arg("i386-code16-stage-2.json");
@@ -215,7 +216,7 @@ async fn buildBiosStage3(out_dir: &Path) -> PathBuf {
         cmd.arg("--path").arg(&local_path);
         println!("cargo:rerun-if-changed={}", local_path.display());
     } else {
-        cmd.arg("--version").arg(BOOTLOADER_VERSION);
+        cmd.arg("--git").arg(BOOTLOADER_REPO);
     }
     cmd.arg("--locked");
     cmd.arg("--target").arg("i686-stage-3.json");
@@ -257,7 +258,7 @@ async fn buildBiosStage4(out_dir: &Path) -> PathBuf {
         cmd.arg("--path").arg(&local_path);
         println!("cargo:rerun-if-changed={}", local_path.display());
     } else {
-        cmd.arg("--version").arg(BOOTLOADER_VERSION);
+        cmd.arg("--git").arg(BOOTLOADER_REPO);
     }
     cmd.arg("--locked");
     cmd.arg("--target").arg("x86_64-stage-4.json");
