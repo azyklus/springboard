@@ -62,14 +62,14 @@ To make your kernel compatible with `springboard`:
   - To use non-standard configuration, you can pass a second argument of type `&'static springboard_api::BootloaderConfig` to the `entry_point` macro. For example, you can require a specific stack size for your kernel:
     ```rust
     const CONFIG: springboard_api::BootloaderConfig = {
-        let mut config = bootloader_api::BootloaderConfig::new_default();
+        let mut config = springboard_api::BootloaderConfig::new_default();
         config.kernel_stack_size = 100 * 1024; // 100 KiB
         config
     };
     springboard_api::entry_point!(kernel_main, config = &CONFIG);
     ```
 - Compile your kernel to an ELF executable by running **`cargo build --target x86_64-unknown-none`**. You might need to run `rustup target add x86_64-unknown-none` before to download precompiled versions of the `core` and `alloc` crates.
-- Thanks to the `entry_point` macro, the compiled executable contains a special section with metadata and the serialized config, which will enable the `bootloader` crate to load it.
+- Thanks to the `entry_point` macro, the compiled executable contains a special section with metadata and the serialized config, which will enable the `springboard` crate to load it.
 
 ### Booting
 
