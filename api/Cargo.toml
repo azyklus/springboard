@@ -1,10 +1,10 @@
 [package]
-name = "bootloader_api"
+name = "springboard-api"
 license.workspace = true
 version.workspace = true
 repository.workspace = true
 edition = "2021"
-description = "Makes a kernel compatible with the bootloader crate"
+description = "Makes a kernel compatible with the `springboard` crate"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

@@ -1,4 +1,4 @@
-use bootloader_test_runner::run_test_kernel;
+use springboard_test_runner::run_test_kernel;
 
 #[test]
 fn check_boot_info() {

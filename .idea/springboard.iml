@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="EMPTY_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/api/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/bios/boot_sector/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/bios/common/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/bios/stage-2/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/bios/stage-3/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/bios/stage-4/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/common/config/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/common/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/tests/runner/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/tests/test_kernels/config_file/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/tests/test_kernels/default_settings/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/tests/test_kernels/higher_half/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/tests/test_kernels/lto/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/tests/test_kernels/map_phys_mem/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/tests/test_kernels/min_stack/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/tests/test_kernels/pie/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/tests/test_kernels/ramdisk/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/uefi/src" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/target" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

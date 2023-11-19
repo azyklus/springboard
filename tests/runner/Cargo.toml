@@ -1,5 +1,5 @@
 [package]
-name = "bootloader_test_runner"
+name = "springboard_test_runner"
 version = "0.1.0"
 authors = ["Philipp Oppermann <dev@phil-opp.com>"]
 edition = "2021"
@@ -7,10 +7,10 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [features]
-bios = ["bootloader/bios"]
-uefi = ["bootloader/uefi", "dep:ovmf-prebuilt"]
+bios = ["springboard/bios"]
+uefi = ["springboard/uefi", "dep:ovmf-prebuilt"]
 
 [dependencies]
-bootloader = { path = "../..", default-features = false }
+springboard = { path = "../..", default-features = false }
 strip-ansi-escapes = "0.1.1"
 ovmf-prebuilt = { version = "0.1.0-alpha.1", optional = true }

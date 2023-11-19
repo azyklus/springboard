@@ -1,5 +1,5 @@
 use crate::{level_4_entries::UsedLevel4Entries, PAGE_SIZE};
-use bootloader_api::info::TlsTemplate;
+use springboard_api::info::TlsTemplate;
 use core::{cmp, iter::Step, mem::size_of, ops::Add};
 
 use x86_64::{

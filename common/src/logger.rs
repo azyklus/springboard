@@ -1,5 +1,5 @@
 use crate::{framebuffer::FrameBufferWriter, serial::SerialPort};
-use bootloader_api::info::FrameBufferInfo;
+use springboard_api::info::FrameBufferInfo;
 use conquer_once::spin::OnceCell;
 use core::fmt::Write;
 use spinning_top::Spinlock;

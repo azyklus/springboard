@@ -154,126 +154,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "bootloader"
-version = "0.11.4"
-dependencies = [
- "anyhow",
- "async-process",
- "bootloader-boot-config",
- "bootloader_test_runner",
- "fatfs",
- "futures",
- "futures-concurrency",
- "gpt",
- "llvm-tools",
- "mbrman",
- "serde_json",
- "tempfile",
- "test_kernel_config_file",
- "test_kernel_default_settings",
- "test_kernel_higher_half",
- "test_kernel_map_phys_mem",
- "test_kernel_min_stack",
- "test_kernel_pie",
- "test_kernel_ramdisk",
-]
-
-[[package]]
-name = "bootloader-boot-config"
-version = "0.11.4"
-dependencies = [
- "serde",
-]
-
-[[package]]
-name = "bootloader-x86_64-bios-boot-sector"
-version = "0.11.4"
-
-[[package]]
-name = "bootloader-x86_64-bios-common"
-version = "0.11.4"
-
-[[package]]
-name = "bootloader-x86_64-bios-stage-2"
-version = "0.11.4"
-dependencies = [
- "bootloader-x86_64-bios-common",
- "byteorder",
- "mbr-nostd",
-]
-
-[[package]]
-name = "bootloader-x86_64-bios-stage-3"
-version = "0.11.4"
-dependencies = [
- "bootloader-x86_64-bios-common",
- "noto-sans-mono-bitmap 0.1.6",
-]
-
-[[package]]
-name = "bootloader-x86_64-bios-stage-4"
-version = "0.11.4"
-dependencies = [
- "bootloader-boot-config",
- "bootloader-x86_64-bios-common",
- "bootloader-x86_64-common",
- "bootloader_api",
- "log",
- "rsdp",
- "serde-json-core",
- "usize_conversions",
- "x86_64",
-]
-
-[[package]]
-name = "bootloader-x86_64-common"
-version = "0.11.4"
-dependencies = [
- "bootloader-boot-config",
- "bootloader_api",
- "conquer-once",
- "log",
- "noto-sans-mono-bitmap 0.2.0",
- "rand",
- "rand_hc",
- "raw-cpuid",
- "spinning_top",
- "uart_16550",
- "usize_conversions",
- "x86_64",
- "xmas-elf",
-]
-
-[[package]]
-name = "bootloader-x86_64-uefi"
-version = "0.11.4"
-dependencies = [
- "bootloader-boot-config",
- "bootloader-x86_64-common",
- "bootloader_api",
- "log",
- "serde-json-core",
- "uefi",
- "x86_64",
-]
-
-[[package]]
-name = "bootloader_api"
-version = "0.11.4"
-dependencies = [
- "rand",
-]
-
-[[package]]
-name = "bootloader_test_runner"
-version = "0.1.0"
-dependencies = [
- "bootloader",
- "ovmf-prebuilt",
- "strip-ansi-escapes",
-]
-
-[[package]]
 name = "byteorder"
 version = "1.4.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -995,6 +875,126 @@ dependencies = [
 ]
 
 [[package]]
+name = "springboard"
+version = "0.11.4"
+dependencies = [
+ "anyhow",
+ "async-process",
+ "fatfs",
+ "futures",
+ "futures-concurrency",
+ "gpt",
+ "llvm-tools",
+ "mbrman",
+ "serde_json",
+ "springboard-boot-config",
+ "springboard_test_runner",
+ "tempfile",
+ "test_kernel_config_file",
+ "test_kernel_default_settings",
+ "test_kernel_higher_half",
+ "test_kernel_map_phys_mem",
+ "test_kernel_min_stack",
+ "test_kernel_pie",
+ "test_kernel_ramdisk",
+]
+
+[[package]]
+name = "springboard-api"
+version = "0.11.4"
+dependencies = [
+ "rand",
+]
+
+[[package]]
+name = "springboard-boot-config"
+version = "0.11.4"
+dependencies = [
+ "serde",
+]
+
+[[package]]
+name = "springboard-x86_64-bios-boot-sector"
+version = "0.11.4"
+
+[[package]]
+name = "springboard-x86_64-bios-common"
+version = "0.11.4"
+
+[[package]]
+name = "springboard-x86_64-bios-stage-2"
+version = "0.11.4"
+dependencies = [
+ "byteorder",
+ "mbr-nostd",
+ "springboard-x86_64-bios-common",
+]
+
+[[package]]
+name = "springboard-x86_64-bios-stage-3"
+version = "0.11.4"
+dependencies = [
+ "noto-sans-mono-bitmap 0.1.6",
+ "springboard-x86_64-bios-common",
+]
+
+[[package]]
+name = "springboard-x86_64-bios-stage-4"
+version = "0.11.4"
+dependencies = [
+ "log",
+ "rsdp",
+ "serde-json-core",
+ "springboard-api",
+ "springboard-boot-config",
+ "springboard-x86_64-bios-common",
+ "springboard-x86_64-common",
+ "usize_conversions",
+ "x86_64",
+]
+
+[[package]]
+name = "springboard-x86_64-common"
+version = "0.11.4"
+dependencies = [
+ "conquer-once",
+ "log",
+ "noto-sans-mono-bitmap 0.2.0",
+ "rand",
+ "rand_hc",
+ "raw-cpuid",
+ "spinning_top",
+ "springboard-api",
+ "springboard-boot-config",
+ "uart_16550",
+ "usize_conversions",
+ "x86_64",
+ "xmas-elf",
+]
+
+[[package]]
+name = "springboard-x86_64-uefi"
+version = "0.11.4"
+dependencies = [
+ "log",
+ "serde-json-core",
+ "springboard-api",
+ "springboard-boot-config",
+ "springboard-x86_64-common",
+ "uefi",
+ "x86_64",
+]
+
+[[package]]
+name = "springboard_test_runner"
+version = "0.1.0"
+dependencies = [
+ "ovmf-prebuilt",
+ "springboard",
+ "strip-ansi-escapes",
+]
+
+[[package]]
 name = "stable_deref_trait"
 version = "1.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1055,7 +1055,7 @@ dependencies = [
 name = "test_kernel_config_file"
 version = "0.1.0"
 dependencies = [
- "bootloader_api",
+ "springboard-api",
  "uart_16550",
  "x86_64",
 ]
@@ -1064,7 +1064,7 @@ dependencies = [
 name = "test_kernel_default_settings"
 version = "0.1.0"
 dependencies = [
- "bootloader_api",
+ "springboard-api",
  "uart_16550",
  "x86_64",
 ]
@@ -1073,7 +1073,7 @@ dependencies = [
 name = "test_kernel_higher_half"
 version = "0.1.0"
 dependencies = [
- "bootloader_api",
+ "springboard-api",
  "uart_16550",
  "x86_64",
 ]
@@ -1082,7 +1082,7 @@ dependencies = [
 name = "test_kernel_lto"
 version = "0.1.0"
 dependencies = [
- "bootloader_api",
+ "springboard-api",
  "uart_16550",
  "x86_64",
 ]
@@ -1091,7 +1091,7 @@ dependencies = [
 name = "test_kernel_map_phys_mem"
 version = "0.1.0"
 dependencies = [
- "bootloader_api",
+ "springboard-api",
  "uart_16550",
  "x86_64",
 ]
@@ -1100,7 +1100,7 @@ dependencies = [
 name = "test_kernel_min_stack"
 version = "0.1.0"
 dependencies = [
- "bootloader_api",
+ "springboard-api",
  "uart_16550",
  "x86_64",
 ]
@@ -1109,7 +1109,7 @@ dependencies = [
 name = "test_kernel_pie"
 version = "0.1.0"
 dependencies = [
- "bootloader_api",
+ "springboard-api",
  "uart_16550",
  "x86_64",
 ]
@@ -1118,7 +1118,7 @@ dependencies = [
 name = "test_kernel_ramdisk"
 version = "0.1.0"
 dependencies = [
- "bootloader_api",
+ "springboard-api",
  "uart_16550",
  "x86_64",
 ]

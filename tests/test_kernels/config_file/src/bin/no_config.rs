@@ -1,7 +1,7 @@
 #![no_std] // don't link the Rust standard library
 #![no_main] // disable all Rust-level entry points
 
-use bootloader_api::{entry_point, BootInfo};
+use springboard_api::{entry_point, BootInfo};
 use core::fmt::Write;
 use test_kernel_config_file::{exit_qemu, serial, QemuExitCode};
 

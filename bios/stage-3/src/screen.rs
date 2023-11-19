@@ -1,4 +1,4 @@
-use bootloader_x86_64_bios_common::{racy_cell::RacyCell, BiosFramebufferInfo, PixelFormat};
+use springboard_x86_64_bios_common::{racy_cell::RacyCell, BiosFramebufferInfo, PixelFormat};
 use core::{fmt, ptr};
 use noto_sans_mono_bitmap::{get_bitmap, BitmapChar, BitmapHeight, FontWeight};
 

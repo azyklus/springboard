@@ -1,5 +1,5 @@
 [package]
-name = "bootloader-x86_64-bios-common"
+name = "springboard-x86_64-bios-common"
 version.workspace = true
 edition = "2021"
 license.workspace = true

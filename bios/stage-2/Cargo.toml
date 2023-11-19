@@ -1,18 +1,18 @@
 [package]
-name = "bootloader-x86_64-bios-stage-2"
+name = "springboard-x86_64-bios-stage-2"
 version.workspace = true
-authors = ["Philipp Oppermann <dev@phil-opp.com>"]
+authors = ["Az <azyklus@disroot.org>"]
 edition = "2021"
 license.workspace = true
 repository.workspace = true
-description = "Second BIOS stage of the `bootloader` crate"
+description = "Second BIOS stage of the `springboard` crate"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 mbr-nostd = "0.1.0"
 byteorder = { version = "1.4.3", default-features = false }
-bootloader-x86_64-bios-common = { workspace = true }
+springboard-x86_64-bios-common = { workspace = true }
 
 # This currently causes a cargo warning, but it is required for publishing to crates.io.
 # See https://github.com/rust-lang/cargo/issues/8264 for details.

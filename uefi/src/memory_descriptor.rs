@@ -1,5 +1,5 @@
-use bootloader_api::info::MemoryRegionKind;
-use bootloader_x86_64_common::legacy_memory_region::LegacyMemoryRegion;
+use springboard_api::info::MemoryRegionKind;
+use springboard_x86_64_common::legacy_memory_region::LegacyMemoryRegion;
 use uefi::table::boot::{MemoryDescriptor, MemoryType};
 use x86_64::PhysAddr;
 

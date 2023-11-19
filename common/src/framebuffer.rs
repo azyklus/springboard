@@ -1,4 +1,4 @@
-use bootloader_api::info::{FrameBufferInfo, PixelFormat};
+use springboard_api::info::{FrameBufferInfo, PixelFormat};
 use core::{fmt, ptr};
 use font_constants::BACKUP_CHAR;
 use noto_sans_mono_bitmap::{

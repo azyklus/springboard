@@ -1,6 +1,6 @@
-use bootloader_test_runner::run_test_kernel_internal;
+use springboard_test_runner::run_test_kernel_internal;
 
-use bootloader::BootConfig;
+use springboard_boot_config::BootConfig;
 
 #[test]
 fn default_config() {

@@ -1,6 +1,6 @@
 use std::path::Path;
 
-use bootloader_test_runner::run_test_kernel_with_ramdisk;
+use springboard_test_runner::run_test_kernel_with_ramdisk;
 static RAMDISK_PATH: &str = "tests/ramdisk.txt";
 
 #[test]

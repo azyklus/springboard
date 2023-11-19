@@ -1,4 +1,4 @@
-use bootloader_x86_64_bios_common::BiosInfo;
+use springboard_x86_64_bios_common::BiosInfo;
 use core::{arch::asm, mem::size_of};
 
 static GDT: GdtProtectedMode = GdtProtectedMode::new();

@@ -3,7 +3,7 @@
 #![deny(unsafe_op_in_unsafe_fn)]
 
 use crate::screen::Writer;
-use bootloader_x86_64_bios_common::{hlt, BiosInfo};
+use springboard_x86_64_bios_common::{hlt, BiosInfo};
 use core::{arch::asm, fmt::Write as _};
 
 mod gdt;

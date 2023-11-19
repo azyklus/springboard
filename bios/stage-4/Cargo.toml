@@ -1,18 +1,19 @@
 [package]
-name = "bootloader-x86_64-bios-stage-4"
+authors = ["Az <azyklus@disroot.org>"]
+name = "springboard-x86_64-bios-stage-4"
 version.workspace = true
 edition = "2021"
 license.workspace = true
 repository.workspace = true
-description = "Fourth BIOS stage of the `bootloader` crate"
+description = "Fourth BIOS stage of the `springboard` crate"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-bootloader_api = { workspace = true }
-bootloader-x86_64-common = { workspace = true }
-bootloader-x86_64-bios-common = { workspace = true }
-bootloader-boot-config = { workspace = true }
+springboard-api = { workspace = true }
+springboard-x86_64-common = { workspace = true }
+springboard-x86_64-bios-common = { workspace = true }
+springboard-boot-config = { workspace = true }
 log = "0.4.14"
 x86_64 = "0.14.8"
 rsdp = "2.0.0"

@@ -4,7 +4,7 @@ Trident is an operating system originally developed as part of a series on [Medi
 before being co-opted into a personal research project.
 
 The `springboard` bootloader project is a fork of [rust-osdev/bootloader](https://github.com/rust-osdev/bootloader)
-fine-tuned to the needs of the Trident project.
+fine-tuned to the needs of the Trident 3 project.
 
 As of 2023.11, you will need:
 - The Rust nightly as of 2023.11.12, which you may obtain through the official website: https://rust-lang.org/learn/get-started
@@ -12,7 +12,7 @@ As of 2023.11, you will need:
 
 # Springboard
 
-VERSION: 3.0.1/EARLY/UNRELEASED [![Build Status](https://github.com/azyklus/springboard/actions/workflows/build.yml/badge.svg)](https://github.com/azyklus/springboard/actions/workflows/build.yml)  
+VERSION: 3.0.1/EARLY/UNRELEASED  
 LICENSE: [Apache-2.0](https://github.com/azyklus/springboard/blob/trunk/LICENSE)  
 README: [Where would you rather be?](https://xkcd.com/650/)  
 INFO:

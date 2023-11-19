@@ -1,6 +1,6 @@
 // info taken from https://wiki.osdev.org/VESA_Video_Modes
 
-use bootloader_x86_64_bios_common::PixelFormat;
+use springboard_x86_64_bios_common::PixelFormat;
 
 use crate::{disk::AlignedBuffer, AlignedArrayBuffer};
 use core::arch::asm;

@@ -7,7 +7,7 @@ use crate::{
         copy_to_protected_mode, enter_protected_mode_and_jump_to_stage_3, enter_unreal_mode,
     },
 };
-use bootloader_x86_64_bios_common::{hlt, BiosFramebufferInfo, BiosInfo, Region};
+use springboard_x86_64_bios_common::{hlt, BiosFramebufferInfo, BiosInfo, Region};
 use byteorder::{ByteOrder, LittleEndian};
 use core::{fmt::Write as _, slice};
 use disk::AlignedArrayBuffer;

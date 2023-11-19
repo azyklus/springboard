@@ -1,3 +1,5 @@
+#![allow(non_snake_case)]
+
 use async_process::Command;
 use futures::executor::block_on;
 use futures_concurrency::future::Join;
@@ -6,15 +8,15 @@ const BOOTLOADER_VERSION: &str = env!("CARGO_PKG_VERSION");
 
 fn main() {
     #[cfg(not(feature = "uefi"))]
-    async fn uefi_main() {}
+    async fn uefiMain() {}
     #[cfg(not(feature = "bios"))]
-    async fn bios_main() {}
+    async fn biosMain() {}
 
-    block_on((uefi_main(), bios_main()).join());
+    block_on((uefiMain(), biosMain()).join());
 }
 
 #[cfg(feature = "bios")]
-async fn bios_main() {
+async fn biosMain() {
     let out_dir = PathBuf::from(std::env::var("OUT_DIR").unwrap());
     // Run the bios build commands concurrently.
     // (Cargo already uses multiple threads for building dependencies, but these
@@ -22,17 +24,17 @@ async fn bios_main() {
     // CPUs. So by running the build commands in parallel, we increase the number
     // of utilized cores.)
     #[cfg(not(docsrs_dummy_build))]
-    let (bios_boot_sector_path, bios_stage_2_path, bios_stage_3_path, bios_stage_4_path) = (
-        build_bios_boot_sector(&out_dir),
-        build_bios_stage_2(&out_dir),
-        build_bios_stage_3(&out_dir),
-        build_bios_stage_4(&out_dir),
+       let (bios_boot_sector_path, bios_stage_2_path, bios_stage_3_path, bios_stage_4_path) = (
+        buildBiosBootSector(&out_dir),
+        buildBiosStage2(&out_dir),
+        buildBiosStage3(&out_dir),
+        buildBiosStage4(&out_dir),
     )
-        .join()
-        .await;
+       .join()
+       .await;
     // dummy implementations because docsrs builds have no network access
     #[cfg(docsrs_dummy_build)]
-    let (bios_boot_sector_path, bios_stage_2_path, bios_stage_3_path, bios_stage_4_path) = (
+       let (bios_boot_sector_path, bios_stage_2_path, bios_stage_3_path, bios_stage_4_path) = (
         PathBuf::new(),
         PathBuf::new(),
         PathBuf::new(),
@@ -57,14 +59,14 @@ async fn bios_main() {
 }
 
 #[cfg(feature = "uefi")]
-async fn uefi_main() {
+async fn uefiMain() {
     let out_dir = PathBuf::from(std::env::var("OUT_DIR").unwrap());
 
     #[cfg(not(docsrs_dummy_build))]
-    let uefi_path = build_uefi_bootloader(&out_dir).await;
+       let uefi_path = buildUefiBootloader(&out_dir).await;
     // dummy implementation because docsrs builds have no network access
     #[cfg(docsrs_dummy_build)]
-    let uefi_path = PathBuf::new();
+       let uefi_path = PathBuf::new();
 
     println!(
         "cargo:rustc-env=UEFI_BOOTLOADER_PATH={}",
@@ -74,10 +76,10 @@ async fn uefi_main() {
 
 #[cfg(not(docsrs_dummy_build))]
 #[cfg(feature = "uefi")]
-async fn build_uefi_bootloader(out_dir: &Path) -> PathBuf {
+async fn buildUefiBootloader(out_dir: &Path) -> PathBuf {
     let cargo = std::env::var("CARGO").unwrap_or_else(|_| "cargo".into());
     let mut cmd = Command::new(cargo);
-    cmd.arg("install").arg("bootloader-x86_64-uefi");
+    cmd.arg("install").arg("springboard-x86_64-uefi");
     if Path::new("uefi").exists() {
         // local build
         cmd.arg("--path").arg("uefi");
@@ -89,16 +91,16 @@ async fn build_uefi_bootloader(out_dir: &Path) -> PathBuf {
     cmd.arg("--locked");
     cmd.arg("--target").arg("x86_64-unknown-uefi");
     cmd.arg("-Zbuild-std=core")
-        .arg("-Zbuild-std-features=compiler-builtins-mem");
+       .arg("-Zbuild-std-features=compiler-builtins-mem");
     cmd.arg("--root").arg(out_dir);
     cmd.env_remove("RUSTFLAGS");
     cmd.env_remove("CARGO_ENCODED_RUSTFLAGS");
     let status = cmd
-        .status()
-        .await
-        .expect("failed to run cargo install for uefi bootloader");
+       .status()
+       .await
+       .expect("failed to run cargo install for uefi bootloader");
     if status.success() {
-        let path = out_dir.join("bin").join("bootloader-x86_64-uefi.efi");
+        let path = out_dir.join("bin").join("springboard-x86_64-uefi.efi");
         assert!(
             path.exists(),
             "uefi bootloader executable does not exist after building"
@@ -111,13 +113,13 @@ async fn build_uefi_bootloader(out_dir: &Path) -> PathBuf {
 
 #[cfg(not(docsrs_dummy_build))]
 #[cfg(feature = "bios")]
-async fn build_bios_boot_sector(out_dir: &Path) -> PathBuf {
+async fn buildBiosBootSector(out_dir: &Path) -> PathBuf {
     let cargo = std::env::var("CARGO").unwrap_or_else(|_| "cargo".into());
     let mut cmd = Command::new(cargo);
-    cmd.arg("install").arg("bootloader-x86_64-bios-boot-sector");
+    cmd.arg("install").arg("springboard-x86_64-bios-boot-sector");
     let local_path = Path::new(env!("CARGO_MANIFEST_DIR"))
-        .join("bios")
-        .join("boot_sector");
+       .join("bios")
+       .join("boot_sector");
     if local_path.exists() {
         // local build
         cmd.arg("--path").arg(&local_path);
@@ -129,19 +131,19 @@ async fn build_bios_boot_sector(out_dir: &Path) -> PathBuf {
     cmd.arg("--target").arg("i386-code16-boot-sector.json");
     cmd.arg("--profile").arg("stage-1");
     cmd.arg("-Zbuild-std=core")
-        .arg("-Zbuild-std-features=compiler-builtins-mem");
+       .arg("-Zbuild-std-features=compiler-builtins-mem");
     cmd.arg("--root").arg(out_dir);
     cmd.env_remove("RUSTFLAGS");
     cmd.env_remove("CARGO_ENCODED_RUSTFLAGS");
     cmd.env_remove("RUSTC_WORKSPACE_WRAPPER"); // used by clippy
     let status = cmd
-        .status()
-        .await
-        .expect("failed to run cargo install for bios bootsector");
+       .status()
+       .await
+       .expect("failed to run cargo install for bios bootsector");
     let elf_path = if status.success() {
         let path = out_dir
-            .join("bin")
-            .join("bootloader-x86_64-bios-boot-sector");
+           .join("bin")
+           .join("springboard-x86_64-bios-boot-sector");
         assert!(
             path.exists(),
             "bios boot sector executable does not exist after building"
@@ -150,18 +152,18 @@ async fn build_bios_boot_sector(out_dir: &Path) -> PathBuf {
     } else {
         panic!("failed to build bios boot sector");
     };
-    convert_elf_to_bin(elf_path).await
+    convertElfBin(elf_path).await
 }
 
 #[cfg(not(docsrs_dummy_build))]
 #[cfg(feature = "bios")]
-async fn build_bios_stage_2(out_dir: &Path) -> PathBuf {
+async fn buildBiosStage2(out_dir: &Path) -> PathBuf {
     let cargo = std::env::var("CARGO").unwrap_or_else(|_| "cargo".into());
     let mut cmd = Command::new(cargo);
-    cmd.arg("install").arg("bootloader-x86_64-bios-stage-2");
+    cmd.arg("install").arg("springboard-x86_64-bios-stage-2");
     let local_path = Path::new(env!("CARGO_MANIFEST_DIR"))
-        .join("bios")
-        .join("stage-2");
+       .join("bios")
+       .join("stage-2");
     if local_path.exists() {
         // local build
         cmd.arg("--path").arg(&local_path);
@@ -177,17 +179,17 @@ async fn build_bios_stage_2(out_dir: &Path) -> PathBuf {
     cmd.arg("--target").arg("i386-code16-stage-2.json");
     cmd.arg("--profile").arg("stage-2");
     cmd.arg("-Zbuild-std=core")
-        .arg("-Zbuild-std-features=compiler-builtins-mem");
+       .arg("-Zbuild-std-features=compiler-builtins-mem");
     cmd.arg("--root").arg(out_dir);
     cmd.env_remove("RUSTFLAGS");
     cmd.env_remove("CARGO_ENCODED_RUSTFLAGS");
     cmd.env_remove("RUSTC_WORKSPACE_WRAPPER"); // used by clippy
     let status = cmd
-        .status()
-        .await
-        .expect("failed to run cargo install for bios second stage");
+       .status()
+       .await
+       .expect("failed to run cargo install for bios second stage");
     let elf_path = if status.success() {
-        let path = out_dir.join("bin").join("bootloader-x86_64-bios-stage-2");
+        let path = out_dir.join("bin").join("springboard-x86_64-bios-stage-2");
         assert!(
             path.exists(),
             "bios second stage executable does not exist after building"
@@ -196,18 +198,18 @@ async fn build_bios_stage_2(out_dir: &Path) -> PathBuf {
     } else {
         panic!("failed to build bios second stage");
     };
-    convert_elf_to_bin(elf_path).await
+    convertElfBin(elf_path).await
 }
 
 #[cfg(not(docsrs_dummy_build))]
 #[cfg(feature = "bios")]
-async fn build_bios_stage_3(out_dir: &Path) -> PathBuf {
+async fn buildBiosStage3(out_dir: &Path) -> PathBuf {
     let cargo = std::env::var("CARGO").unwrap_or_else(|_| "cargo".into());
     let mut cmd = Command::new(cargo);
-    cmd.arg("install").arg("bootloader-x86_64-bios-stage-3");
+    cmd.arg("install").arg("springboard-x86_64-bios-stage-3");
     let local_path = Path::new(env!("CARGO_MANIFEST_DIR"))
-        .join("bios")
-        .join("stage-3");
+       .join("bios")
+       .join("stage-3");
     if local_path.exists() {
         // local build
         cmd.arg("--path").arg(&local_path);
@@ -219,17 +221,17 @@ async fn build_bios_stage_3(out_dir: &Path) -> PathBuf {
     cmd.arg("--target").arg("i686-stage-3.json");
     cmd.arg("--profile").arg("stage-3");
     cmd.arg("-Zbuild-std=core")
-        .arg("-Zbuild-std-features=compiler-builtins-mem");
+       .arg("-Zbuild-std-features=compiler-builtins-mem");
     cmd.arg("--root").arg(out_dir);
     cmd.env_remove("RUSTFLAGS");
     cmd.env_remove("CARGO_ENCODED_RUSTFLAGS");
     cmd.env_remove("RUSTC_WORKSPACE_WRAPPER"); // used by clippy
     let status = cmd
-        .status()
-        .await
-        .expect("failed to run cargo install for bios stage-3");
+       .status()
+       .await
+       .expect("failed to run cargo install for bios stage-3");
     let elf_path = if status.success() {
-        let path = out_dir.join("bin").join("bootloader-x86_64-bios-stage-3");
+        let path = out_dir.join("bin").join("springboard-x86_64-bios-stage-3");
         assert!(
             path.exists(),
             "bios stage-3 executable does not exist after building"
@@ -238,18 +240,18 @@ async fn build_bios_stage_3(out_dir: &Path) -> PathBuf {
     } else {
         panic!("failed to build bios stage-3");
     };
-    convert_elf_to_bin(elf_path).await
+    convertElfBin(elf_path).await
 }
 
 #[cfg(not(docsrs_dummy_build))]
 #[cfg(feature = "bios")]
-async fn build_bios_stage_4(out_dir: &Path) -> PathBuf {
+async fn buildBiosStage4(out_dir: &Path) -> PathBuf {
     let cargo = std::env::var("CARGO").unwrap_or_else(|_| "cargo".into());
     let mut cmd = Command::new(cargo);
-    cmd.arg("install").arg("bootloader-x86_64-bios-stage-4");
+    cmd.arg("install").arg("springboard-x86_64-bios-stage-4");
     let local_path = Path::new(env!("CARGO_MANIFEST_DIR"))
-        .join("bios")
-        .join("stage-4");
+       .join("bios")
+       .join("stage-4");
     if local_path.exists() {
         // local build
         cmd.arg("--path").arg(&local_path);
@@ -261,17 +263,17 @@ async fn build_bios_stage_4(out_dir: &Path) -> PathBuf {
     cmd.arg("--target").arg("x86_64-stage-4.json");
     cmd.arg("--profile").arg("stage-4");
     cmd.arg("-Zbuild-std=core")
-        .arg("-Zbuild-std-features=compiler-builtins-mem");
+       .arg("-Zbuild-std-features=compiler-builtins-mem");
     cmd.arg("--root").arg(out_dir);
     cmd.env_remove("RUSTFLAGS");
     cmd.env_remove("CARGO_ENCODED_RUSTFLAGS");
     cmd.env_remove("RUSTC_WORKSPACE_WRAPPER"); // used by clippy
     let status = cmd
-        .status()
-        .await
-        .expect("failed to run cargo install for bios stage-4");
+       .status()
+       .await
+       .expect("failed to run cargo install for bios stage-4");
     let elf_path = if status.success() {
-        let path = out_dir.join("bin").join("bootloader-x86_64-bios-stage-4");
+        let path = out_dir.join("bin").join("springboard-x86_64-bios-stage-4");
         assert!(
             path.exists(),
             "bios stage-4 executable does not exist after building"
@@ -281,18 +283,18 @@ async fn build_bios_stage_4(out_dir: &Path) -> PathBuf {
         panic!("failed to build bios stage-4");
     };
 
-    convert_elf_to_bin(elf_path).await
+    convertElfBin(elf_path).await
 }
 
 #[cfg(not(docsrs_dummy_build))]
 #[cfg(feature = "bios")]
-async fn convert_elf_to_bin(elf_path: PathBuf) -> PathBuf {
+async fn convertElfBin(elf_path: PathBuf) -> PathBuf {
     let flat_binary_path = elf_path.with_extension("bin");
 
     let llvm_tools = llvm_tools::LlvmTools::new().expect("failed to get llvm tools");
     let objcopy = llvm_tools
-        .tool(&llvm_tools::exe("llvm-objcopy"))
-        .expect("LlvmObjcopyNotFound");
+       .tool(&llvm_tools::exe("llvm-objcopy"))
+       .expect("LlvmObjcopyNotFound");
 
     // convert first stage to binary
     let mut cmd = Command::new(objcopy);
@@ -302,9 +304,9 @@ async fn convert_elf_to_bin(elf_path: PathBuf) -> PathBuf {
     cmd.arg(&elf_path);
     cmd.arg(&flat_binary_path);
     let output = cmd
-        .output()
-        .await
-        .expect("failed to execute llvm-objcopy command");
+       .output()
+       .await
+       .expect("failed to execute llvm-objcopy command");
     if !output.status.success() {
         panic!(
             "objcopy failed: {}",

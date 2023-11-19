@@ -35,7 +35,7 @@ use anyhow::Context;
 use tempfile::NamedTempFile;
 
 use crate::file_data_source::FileDataSource;
-pub use bootloader_boot_config::BootConfig;
+pub use springboard_boot_config::BootConfig;
 
 const KERNEL_FILE_NAME: &str = "kernel-x86_64";
 const RAMDISK_FILE_NAME: &str = "ramdisk";

@@ -1,5 +1,5 @@
 [package]
-name = "bootloader-x86_64-common"
+name = "springboard-x86_64-common"
 version.workspace = true
 edition = "2021"
 description = "Common code for the x86_64 bootloader implementations"
@@ -9,8 +9,8 @@ repository.workspace = true
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-bootloader_api = { workspace = true }
-bootloader-boot-config = { workspace = true }
+springboard-api = { workspace = true }
+springboard-boot-config = { workspace = true }
 conquer-once = { version = "0.3.2", default-features = false }
 spinning_top = "0.2.4"
 usize_conversions = "0.2.0"

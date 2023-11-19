@@ -3,9 +3,9 @@
 #![deny(unsafe_op_in_unsafe_fn)]
 
 use crate::memory_descriptor::UefiMemoryDescriptor;
-use bootloader_api::info::FrameBufferInfo;
-use bootloader_boot_config::BootConfig;
-use bootloader_x86_64_common::{
+use springboard_api::info::FrameBufferInfo;
+use springboard_boot_config::BootConfig;
+use springboard_x86_64_common::{
     legacy_memory_region::LegacyFrameAllocator, Kernel, RawFrameBufferInfo, SystemInfo,
 };
 use core::{
@@ -168,7 +168,7 @@ fn main_inner(image: Handle, mut st: SystemTable<Boot>) -> Status {
         ramdisk_len,
     };
 
-    bootloader_x86_64_common::load_and_switch_to_kernel(
+    springboard_x86_64_common::load_and_switch_to_kernel(
         kernel,
         config,
         frame_allocator,
@@ -385,7 +385,7 @@ fn load_file_from_tftp_boot_server(
 /// Creates page table abstraction types for both the bootloader and kernel page tables.
 fn create_page_tables(
     frame_allocator: &mut impl FrameAllocator<Size4KiB>,
-) -> bootloader_x86_64_common::PageTables {
+) -> springboard_x86_64_common::PageTables {
     // UEFI identity-maps all memory, so the offset between physical and virtual addresses is 0
     let phys_offset = VirtAddr::new(0);
 
@@ -441,7 +441,7 @@ fn create_page_tables(
         )
     };
 
-    bootloader_x86_64_common::PageTables {
+    springboard_x86_64_common::PageTables {
         bootloader: bootloader_page_table,
         kernel: kernel_page_table,
         kernel_level_4_frame,
@@ -506,8 +506,8 @@ fn init_logger(
         width: mode_info.resolution().0,
         height: mode_info.resolution().1,
         pixel_format: match mode_info.pixel_format() {
-            PixelFormat::Rgb => bootloader_api::info::PixelFormat::Rgb,
-            PixelFormat::Bgr => bootloader_api::info::PixelFormat::Bgr,
+            PixelFormat::Rgb => springboard_api::info::PixelFormat::Rgb,
+            PixelFormat::Bgr => springboard_api::info::PixelFormat::Bgr,
             PixelFormat::Bitmask | PixelFormat::BltOnly => {
                 panic!("Bitmask and BltOnly framebuffers are not supported")
             }
@@ -518,7 +518,7 @@ fn init_logger(
 
     log::info!("UEFI boot");
 
-    bootloader_x86_64_common::init_logger(
+    springboard_x86_64_common::init_logger(
         slice,
         info,
         config.log_level,
@@ -544,7 +544,7 @@ fn panic(info: &core::panic::PanicInfo) -> ! {
     }
 
     unsafe {
-        bootloader_x86_64_common::logger::LOGGER
+        springboard_x86_64_common::logger::LOGGER
             .get()
             .map(|l| l.force_unlock())
     };

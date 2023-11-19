@@ -1,6 +1,6 @@
 #![no_std]
 
-use bootloader_api::{config::Mapping, BootloaderConfig};
+use springboard_api::{config::Mapping, BootloaderConfig};
 
 pub const BOOTLOADER_CONFIG: BootloaderConfig = {
     let mut config = BootloaderConfig::new_default();

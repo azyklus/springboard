@@ -1,5 +1,5 @@
 use crate::{entropy, load_kernel::VirtualAddressOffset, BootInfo, RawFrameBufferInfo};
-use bootloader_api::{config, info::MemoryRegion, BootloaderConfig};
+use springboard_api::{config, info::MemoryRegion, BootloaderConfig};
 use core::{alloc::Layout, iter::Step};
 use rand::{
     distributions::{Distribution, Uniform},

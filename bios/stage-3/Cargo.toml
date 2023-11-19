@@ -1,7 +1,7 @@
 [package]
-name = "bootloader-x86_64-bios-stage-3"
+name = "springboard-x86_64-bios-stage-3"
 version.workspace = true
-authors = ["Philipp Oppermann <dev@phil-opp.com>"]
+authors = ["Az <azyklus@disroot.org>"]
 edition = "2021"
 license.workspace = true
 repository.workspace = true
@@ -10,7 +10,7 @@ description = "Third BIOS stage of the `bootloader` crate"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-bootloader-x86_64-bios-common = { workspace = true }
+springboard-x86_64-bios-common = { workspace = true }
 noto-sans-mono-bitmap = "0.1.5"
 
 # This currently causes a cargo warning, but it is required for publishing to crates.io.

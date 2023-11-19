@@ -1,4 +1,4 @@
-use bootloader_x86_64_bios_common::racy_cell::RacyCell;
+use springboard_x86_64_bios_common::racy_cell::RacyCell;
 use core::arch::asm;
 
 static LEVEL_4: RacyCell<PageTable> = RacyCell::new(PageTable::empty());

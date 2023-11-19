@@ -1,6 +1,6 @@
-use bootloader_api::info::MemoryRegionKind;
-use bootloader_x86_64_bios_common::E820MemoryRegion;
-use bootloader_x86_64_common::legacy_memory_region::LegacyMemoryRegion;
+use springboard_api::info::MemoryRegionKind;
+use springboard_x86_64_bios_common::E820MemoryRegion;
+use springboard_x86_64_common::legacy_memory_region::LegacyMemoryRegion;
 use x86_64::PhysAddr;
 
 impl LegacyMemoryRegion for MemoryRegion {

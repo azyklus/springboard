@@ -2,13 +2,12 @@
 #![no_main]
 
 use crate::memory_descriptor::MemoryRegion;
-use bootloader_api::info::{FrameBufferInfo, PixelFormat};
-use bootloader_boot_config::{BootConfig, LevelFilter};
-use bootloader_x86_64_bios_common::{BiosFramebufferInfo, BiosInfo, E820MemoryRegion};
-use bootloader_x86_64_common::RawFrameBufferInfo;
-use bootloader_x86_64_common::{
+use springboard_api::info::{FrameBufferInfo, PixelFormat};
+use springboard_boot_config::{BootConfig, LevelFilter};
+use springboard_x86_64_bios_common::{BiosFramebufferInfo, BiosInfo, E820MemoryRegion};
+use springboard_x86_64_common::{
     legacy_memory_region::LegacyFrameAllocator, load_and_switch_to_kernel, Kernel, PageTables,
-    SystemInfo,
+    SystemInfo, RawFrameBufferInfo,
 };
 use core::{cmp, slice};
 use usize_conversions::usize_from;
@@ -180,9 +179,9 @@ fn init_logger(
         width: info.width.into(),
         height: info.height.into(),
         pixel_format: match info.pixel_format {
-            bootloader_x86_64_bios_common::PixelFormat::Rgb => PixelFormat::Rgb,
-            bootloader_x86_64_bios_common::PixelFormat::Bgr => PixelFormat::Bgr,
-            bootloader_x86_64_bios_common::PixelFormat::Unknown {
+            springboard_x86_64_bios_common::PixelFormat::Rgb => PixelFormat::Rgb,
+            springboard_x86_64_bios_common::PixelFormat::Bgr => PixelFormat::Bgr,
+            springboard_x86_64_bios_common::PixelFormat::Unknown {
                 red_position,
                 green_position,
                 blue_position,
@@ -203,7 +202,7 @@ fn init_logger(
         )
     };
 
-    bootloader_x86_64_common::init_logger(
+    springboard_x86_64_common::init_logger(
         framebuffer,
         framebuffer_info,
         log_level,
@@ -288,7 +287,7 @@ fn detect_rsdp() -> Option<PhysAddr> {
 #[panic_handler]
 fn panic(info: &core::panic::PanicInfo) -> ! {
     unsafe {
-        bootloader_x86_64_common::logger::LOGGER
+        springboard_x86_64_common::logger::LOGGER
             .get()
             .map(|l| l.force_unlock())
     };
