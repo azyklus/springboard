@@ -876,7 +876,7 @@ dependencies = [
 
 [[package]]
 name = "springboard"
-version = "0.11.4"
+version = "3.0.1"
 dependencies = [
  "anyhow",
  "async-process",
@@ -901,29 +901,29 @@ dependencies = [
 
 [[package]]
 name = "springboard-api"
-version = "0.11.4"
+version = "3.0.1"
 dependencies = [
  "rand",
 ]
 
 [[package]]
 name = "springboard-boot-config"
-version = "0.11.4"
+version = "3.0.1"
 dependencies = [
  "serde",
 ]
 
 [[package]]
 name = "springboard-x86_64-bios-boot-sector"
-version = "0.11.4"
+version = "3.0.1"
 
 [[package]]
 name = "springboard-x86_64-bios-common"
-version = "0.11.4"
+version = "3.0.1"
 
 [[package]]
 name = "springboard-x86_64-bios-stage-2"
-version = "0.11.4"
+version = "3.0.1"
 dependencies = [
  "byteorder",
  "mbr-nostd",
@@ -932,7 +932,7 @@ dependencies = [
 
 [[package]]
 name = "springboard-x86_64-bios-stage-3"
-version = "0.11.4"
+version = "3.0.1"
 dependencies = [
  "noto-sans-mono-bitmap 0.1.6",
  "springboard-x86_64-bios-common",
@@ -940,7 +940,7 @@ dependencies = [
 
 [[package]]
 name = "springboard-x86_64-bios-stage-4"
-version = "0.11.4"
+version = "3.0.1"
 dependencies = [
  "log",
  "rsdp",
@@ -955,7 +955,7 @@ dependencies = [
 
 [[package]]
 name = "springboard-x86_64-common"
-version = "0.11.4"
+version = "3.0.1"
 dependencies = [
  "conquer-once",
  "log",
@@ -974,7 +974,7 @@ dependencies = [
 
 [[package]]
 name = "springboard-x86_64-uefi"
-version = "0.11.4"
+version = "3.0.1"
 dependencies = [
  "log",
  "serde-json-core",

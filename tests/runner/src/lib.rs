@@ -1,5 +1,5 @@
-use bootloader::BootConfig;
-use bootloader::DiskImageBuilder;
+use springboard::BootConfig;
+use springboard::DiskImageBuilder;
 use std::path::Path;
 
 pub fn run_test_kernel(kernel_binary_path: &str) {

@@ -1,5 +1,5 @@
 //! Provides the interface to make kernels compatible with the
-//! [**`bootloader`**](https://docs.rs/bootloader/latest/bootloader/) crate.
+//! [**`springboard`**](https://docs.rs/springboard/latest/springboard) crate.
 
 #![cfg_attr(not(test), no_std)]
 #![deny(unsafe_op_in_unsafe_fn)]
@@ -44,9 +44,9 @@ mod version_info {
 ///   #![no_main]
 ///   # #![feature(lang_items)]
 ///  
-///   bootloader_api::entry_point!(main);
+///   springboard_api::entry_point!(main);
 ///  
-///   fn main(bootinfo: &'static mut bootloader_api::BootInfo) -> ! {
+///   fn main(bootinfo: &'static mut springboard_api::BootInfo) -> ! {
 ///       loop {}
 ///   }
 ///
@@ -69,7 +69,7 @@ mod version_info {
 ///   #![no_main]
 ///   # #![feature(lang_items)]
 ///  
-///   use bootloader_api::{entry_point, BootloaderConfig};
+///   use springboard_api::{entry_point, BootloaderConfig};
 ///   
 ///   pub static BOOTLOADER_CONFIG: BootloaderConfig = {
 ///       let mut config = BootloaderConfig::new_default();
@@ -79,7 +79,7 @@ mod version_info {
 ///
 ///   entry_point!(main, config = &BOOTLOADER_CONFIG);
 ///
-///   fn main(bootinfo: &'static mut bootloader_api::BootInfo) -> ! {
+///   fn main(bootinfo: &'static mut springboard_api::BootInfo) -> ! {
 ///       loop {}
 ///   }
 ///

@@ -31,15 +31,15 @@ exclude = ["examples/basic", "examples/test_framework"]
 
 [workspace.package]
 # don't forget to update `workspace.dependencies` below
-version = "0.11.4"
+version = "3.0.1"
 license = "Apache-2.0"
 repository = "https://github.com/azyklus/springboard"
 
 [workspace.dependencies]
-springboard-api = { version = "0.11.4", path = "api" }
-springboard-x86_64-common = { version = "0.11.4", path = "common" }
-springboard-boot-config = { version = "0.11.4", path = "common/config" }
-springboard-x86_64-bios-common = { version = "0.11.4", path = "bios/common" }
+springboard-api = { version = "3.0.1", path = "api" }
+springboard-x86_64-common = { version = "3.0.1", path = "common" }
+springboard-boot-config = { version = "3.0.1", path = "common/config" }
+springboard-x86_64-bios-common = { version = "3.0.1", path = "bios/common" }
 
 [features]
 default = ["bios", "uefi"]

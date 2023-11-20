@@ -8,7 +8,7 @@ use crate::config::ApiVersion;
 /// have the following signature:
 ///
 /// ```
-/// # use bootloader_api::BootInfo;
+/// # use springboard_api::BootInfo;
 /// # type _SIGNATURE =
 /// extern "C" fn(boot_info: &'static mut BootInfo) -> !;
 /// ```
