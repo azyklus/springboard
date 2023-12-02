@@ -4,6 +4,7 @@
 #![cfg_attr(not(test), no_std)]
 #![deny(unsafe_op_in_unsafe_fn)]
 #![warn(missing_docs)]
+#![feature(decl_macro)]
 
 pub use self::{config::BootloaderConfig, info::BootInfo};
 
@@ -13,11 +14,11 @@ pub mod config;
 pub mod info;
 
 mod concat {
-    include!(concat!(env!("OUT_DIR"), "/concat.rs"));
+   include!(concat!(env!("OUT_DIR"), "/concat.rs"));
 }
 
 mod version_info {
-    include!(concat!(env!("OUT_DIR"), "/version_info.rs"));
+   include!(concat!(env!("OUT_DIR"), "/version_info.rs"));
 }
 
 /// Defines the entry point function.
@@ -44,7 +45,7 @@ mod version_info {
 ///   #![no_main]
 ///   # #![feature(lang_items)]
 ///  
-///   springboard_api::entry_point!(main);
+///   springboard_api::start!(main);
 ///  
 ///   fn main(bootinfo: &'static mut springboard_api::BootInfo) -> ! {
 ///       loop {}
@@ -69,7 +70,7 @@ mod version_info {
 ///   #![no_main]
 ///   # #![feature(lang_items)]
 ///  
-///   use springboard_api::{entry_point, BootloaderConfig};
+///   use springboard_api::{start, BootloaderConfig};
 ///   
 ///   pub static BOOTLOADER_CONFIG: BootloaderConfig = {
 ///       let mut config = BootloaderConfig::new_default();
@@ -77,7 +78,7 @@ mod version_info {
 ///       config
 ///   };
 ///
-///   entry_point!(main, config = &BOOTLOADER_CONFIG);
+///   start!(main, config = &BOOTLOADER_CONFIG);
 ///
 ///   fn main(bootinfo: &'static mut springboard_api::BootInfo) -> ! {
 ///       loop {}
@@ -106,36 +107,35 @@ mod version_info {
 ///   `#[link_section = ".bootloader-config"]`, which instructs the Rust compiler to store it
 ///   in a special section of the resulting ELF executable. From there, the bootloader will
 ///   automatically read it when loading the kernel.
-#[macro_export]
-macro_rules! entry_point {
-    ($path:path) => {
-        $crate::entry_point!($path, config = &$crate::BootloaderConfig::new_default());
-    };
-    ($path:path, config = $config:expr) => {
-        const _: () = {
-            #[link_section = ".bootloader-config"]
-            pub static __BOOTLOADER_CONFIG: [u8; $crate::BootloaderConfig::SERIALIZED_LEN] = {
-                // validate the type
-                let config: &$crate::BootloaderConfig = $config;
-                config.serialize()
-            };
+pub macro start {
+   ($path:path) => {
+      $crate::start!($path, config = &$crate::BootloaderConfig::new_default());
+   },
+   ($path:path, config = $config:expr) => {
+      const _: () = {
+         #[link_section = ".bootloader-config"]
+         pub static __BOOTLOADER_CONFIG: [u8; $crate::BootloaderConfig::SERIALIZED_LEN] = {
+            // validate the type
+            let config: &$crate::BootloaderConfig = $config;
+            config.serialize()
+         };
 
-            #[export_name = "_start"]
-            pub extern "C" fn __impl_start(boot_info: &'static mut $crate::BootInfo) -> ! {
-                // validate the signature of the program entry point
-                let f: fn(&'static mut $crate::BootInfo) -> ! = $path;
+         #[export_name = "_start"]
+         pub extern "C" fn __impl_start(boot_info: &'static mut $crate::BootInfo) -> ! {
+            // validate the signature of the program entry point
+            let f: fn(&'static mut $crate::BootInfo) -> ! = $path;
 
-                // ensure that the config is used so that the linker keeps it
-                $crate::__force_use(&__BOOTLOADER_CONFIG);
+            // ensure that the config is used so that the linker keeps it
+            $crate::__force_use(&__BOOTLOADER_CONFIG);
 
-                f(boot_info)
-            }
-        };
-    };
+            f(boot_info)
+         }
+      };
+   }
 }
 
 #[doc(hidden)]
 pub fn __force_use(slice: &[u8]) {
-    let force_use = slice.as_ptr() as usize;
-    unsafe { core::arch::asm!("add {0}, 0", in(reg) force_use, options(nomem, nostack)) };
+   let force_use = slice.as_ptr() as usize;
+   unsafe { core::arch::asm!("add {0}, 0", in(reg) force_use, options(nomem, nostack)) };
 }

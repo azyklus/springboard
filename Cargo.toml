@@ -36,6 +36,7 @@ license = "Apache-2.0"
 repository = "https://github.com/azyklus/springboard"
 
 [workspace.dependencies]
+trident3-base = { git = "https://github.com/azyklus/sys3" }
 springboard-api = { version = "3.0.1", path = "api" }
 springboard-x86_64-common = { version = "3.0.1", path = "common" }
 springboard-boot-config = { version = "3.0.1", path = "common/config" }

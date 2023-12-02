@@ -12,3 +12,4 @@ description = "Makes a kernel compatible with the `springboard` crate"
 
 [dev-dependencies]
 rand = "0.8.4"
+trident3-base.workspace = true
