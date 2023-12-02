@@ -1,20 +1,20 @@
-# Migration from bootloader `v0.10`
+# Migration from rust-osdev/bootloader
 
-This guide summarizes the steps for migrating from `bootloader v0.10.X` to `springboard v3.0.1`.
+This guide summarizes the steps for migrating from `rust-osdev/bootloader` to `springboard`.
 
 ## Kernel
 
-- Replace the `bootloader` dependency of your kernel with a dependency on the `springboard_api` crate and adjust the import path in your `main.rs`:
+- Replace the `bootloader_api` dependency of your kernel with a dependency on the `springboard_api` crate and adjust the import path in your `main.rs`:
   ```diff
    # in Cargo.toml
 
-  -bootloader = { version = "0.10.13" }
+  -bootloader_api = { version = "0.11" }
   +springboard_api = { git="https://github.com/azyklus/springboard", branch="latest" }
   ```
   ```diff
    // in main.rs
 
-  -use bootloader::{entry_point, BootInfo};
+  -use bootloader_api::{entry_point, BootInfo};
   +use springboard_api::{start, BootInfo};
   ```
 - If you used optional features, such as `map-physical-memory`, you can enable them again through the `start` macro:
@@ -30,7 +30,7 @@ This guide summarizes the steps for migrating from `bootloader v0.10.X` to `spri
   // add a `config` argument to the `entry_point` macro call
   start!(kernel_main, config = &BOOTLOADER_CONFIG);
   ```
-  
+
   See the `BootloaderConfig` struct for all configuration options.
 
 To build your kernel, run **`cargo build --target x86_64-unknown-none`**. Since the `x86_64-unknown-none` target is a Tier-2 target, there is no need for `bootimage`, `cargo-xbuild`, or `xargo` anymore. Instead, you can run `rustup target add x86_64-unknown-none` to download precompiled versions of the `core` and `alloc` crates. There is no need for custom JSON-based target files anymore.

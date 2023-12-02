@@ -1,6 +1,6 @@
 # Template: Create a Disk Image
 
-The [`bootloader`](https://docs.rs/bootloader/0.11) crate provides simple functions to create bootable disk images from a kernel. The basic idea is to build your kernel first and then invoke a builder function that calls the disk image creation functions of the `bootloader` crate.
+The [`springboard`](https://mbp2.blog/src/@trident) crate provides simple functions to create bootable disk images from a kernel. The basic idea is to build your kernel first and then invoke a builder function that calls the disk image creation functions of the `springboard` crate.
 
 A good way to implement this is to move your kernel into a `kernel` subdirectory. Then you can create 
 a new `os` crate at the top level that defines a [workspace](https://doc.rust-lang.org/cargo/reference/workspaces.html). The root package has build-dependencies on the `kernel` [artifact](https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#artifact-dependencies) and on the bootloader crate. This allows you to create the bootable disk image in a [cargo build script](https://doc.rust-lang.org/cargo/reference/build-scripts.html) and launch the created image in QEMU in the `main` function.
@@ -24,7 +24,7 @@ name = "os"         # or any other name
 version = "0.1.0"
 
 [build-dependencies]
-bootloader = "0.11"
+springboard = { git="https://github.com/azyklus/springboard", branch="latest" }
 test-kernel = { path = "kernel", artifact = "bin", target = "x86_64-unknown-none" }
 
 [dependencies]
