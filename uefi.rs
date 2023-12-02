@@ -1,9 +1,3 @@
-use std::path::Path;
-
-use springboard_boot_config::BootConfig;
-
-use crate::DiskImageBuilder;
-
 /// Create disk images for booting on legacy BIOS systems.
 pub struct UefiBoot {
    image_builder: DiskImageBuilder,
@@ -43,3 +37,11 @@ impl UefiBoot {
       self.image_builder.create_uefi_tftp_folder(out_path)
    }
 }
+
+// IMPORTS //
+
+use {
+   crate::DiskImageBuilder,
+   springboard_boot_config::BootConfig,
+   std::path::Path,
+};

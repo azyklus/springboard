@@ -9,23 +9,27 @@ repository.workspace = true
 authors = ["Az <azyklus@disroot.org>"]
 edition = "2021"
 
+[lib]
+name = "springboard"
+path = "index.rs"
+
 [workspace]
 members = [
-    "api",
-    "common",
-    "common/config",
-    "uefi",
-    "bios/boot_sector",
-    "bios/stage-*",
-    "bios/common",
-    "tests/runner",
-    "tests/test_kernels/default_settings",
-    "tests/test_kernels/map_phys_mem",
-    "tests/test_kernels/higher_half",
-    "tests/test_kernels/pie",
-    "tests/test_kernels/lto",
-    "tests/test_kernels/ramdisk",
-    "tests/test_kernels/min_stack",
+   "api",
+   "common",
+   "common/config",
+   "uefi",
+   "bios/boot_sector",
+   "bios/stage-*",
+   "bios/common",
+   "tests/runner",
+   "tests/test_kernels/default_settings",
+   "tests/test_kernels/map_phys_mem",
+   "tests/test_kernels/higher_half",
+   "tests/test_kernels/pie",
+   "tests/test_kernels/lto",
+   "tests/test_kernels/ramdisk",
+   "tests/test_kernels/min_stack",
 ]
 exclude = ["examples/basic", "examples/test_framework"]
 
@@ -50,8 +54,8 @@ uefi = ["dep:gpt"]
 [dependencies]
 anyhow = "1.0.32"
 fatfs = { version = "0.3.4", default-features = false, features = [
-    "std",
-    "alloc",
+   "std",
+   "alloc",
 ] }
 tempfile = "3.3.0"
 mbrman = { version = "0.5.1", optional = true }
@@ -113,12 +117,12 @@ lto = true
 
 [profile.test.package.test_kernel_higher_half]
 rustflags = [
-    "-C",
-    "link-args=--image-base 0xFFFF800000000000",
-    "-C",
-    "relocation-model=pic",
-    "-C",
-    "code-model=large",
+   "-C",
+   "link-args=--image-base 0xFFFF800000000000",
+   "-C",
+   "relocation-model=pic",
+   "-C",
+   "code-model=large",
 ]
 
 [profile.test.package.test_kernel_min_stack]

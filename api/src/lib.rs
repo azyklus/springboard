@@ -111,6 +111,7 @@ pub macro start {
    ($path:path) => {
       $crate::start!($path, config = &$crate::BootloaderConfig::new_default());
    },
+
    ($path:path, config = $config:expr) => {
       const _: () = {
          #[link_section = ".bootloader-config"]

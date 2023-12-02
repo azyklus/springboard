@@ -1,12 +1,6 @@
-use anyhow::Context;
-use mbrman::BOOT_ACTIVE;
-use std::{
-    fs::{self, File},
-    io::{self, Seek, SeekFrom},
-    path::Path,
-};
 const SECTOR_SIZE: u32 = 512;
 
+/// Create an MBR disk image.
 pub fn create_mbr_disk(
     bootsector_path: &Path,
     second_stage_path: &Path,
@@ -97,5 +91,17 @@ pub fn create_mbr_disk(
     io::copy(&mut boot_partition, &mut disk)
         .context("failed to copy FAT image to MBR disk image")?;
 
-    Ok(())
+    return Ok(());
 }
+
+// IMPORTS //
+
+use {
+    anyhow::Context,
+    mbrman::BOOT_ACTIVE,
+    std::{
+        fs::{self, File},
+        io::{self, Seek, SeekFrom},
+        path::Path,
+    }
+};
