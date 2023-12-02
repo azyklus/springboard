@@ -1,10 +1,10 @@
 #![no_std] // don't link the Rust standard library
 #![no_main] // disable all Rust-level entry points
 
-use springboard_api::{entry_point, BootInfo};
+use springboard_api::{start, BootInfo};
 use test_kernel_pie::{exit_qemu, QemuExitCode};
 
-entry_point!(kernel_main);
+start!(kernel_main);
 
 fn kernel_main(_boot_info: &'static mut BootInfo) -> ! {
     exit_qemu(QemuExitCode::Success);

@@ -1,10 +1,10 @@
 #![no_std] // don't link the Rust standard library
 #![no_main] // disable all Rust-level entry points
 
-use springboard_api::{entry_point, BootInfo};
+use springboard_api::{start, BootInfo};
 use test_kernel_map_phys_mem::{exit_qemu, QemuExitCode, BOOTLOADER_CONFIG};
 
-entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
+start!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 fn kernel_main(boot_info: &'static mut BootInfo) -> ! {
     let phys_mem_offset = boot_info.physical_memory_offset.into_option().unwrap();
