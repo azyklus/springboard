@@ -37,7 +37,7 @@ exclude = ["examples/basic", "examples/test_framework"]
 # don't forget to update `workspace.dependencies` below
 version = "3.0.1"
 license = "Apache-2.0"
-repository = "https://github.com/azyklus/springboard"
+repository = "https://github.com/kell-dev/springboard"
 
 [workspace.dependencies]
 trident3-base = { git = "https://github.com/azyklus/sys3" }
