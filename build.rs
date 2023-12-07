@@ -6,7 +6,7 @@ use futures_concurrency::future::Join;
 use std::path::{Path, PathBuf};
 
 const BOOTLOADER_VERSION: &str = env!("CARGO_PKG_VERSION");
-const BOOTLOADER_REPO: &str = "https://github.com/azyklus/springboard";
+const BOOTLOADER_REPO: &str = "https://github.com/kell-dev/springboard";
 
 fn main() {
    #[cfg(not(feature = "uefi"))]
